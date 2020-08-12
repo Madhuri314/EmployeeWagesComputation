@@ -2,18 +2,31 @@
 
 isPartTime=1
 isFullTime=2
-empRatePerHrs=20
+numberofWorkingDays=20
+empRatePerHr=20
+totalsalary=0
 
-empCheck=$(( RANDOM%3 ))
+for (( day=1; day<=numberofWorkingDays; day++ ))
+do
+        empCheck=$(( RANDOM%3 ))
 
-case $empCheck in
-        $isPartTime)
-                empHrs=4 ;;
+        case $empCheck in
+                $isFullTime)
+                        empHrs=8
+                        ;;
+                $isPartTime)
+                        empHrs=4
+                        ;;
+                *)
+                        empHrs=0
+                        ;;
+        esac
 
-        $isFullTime)
-                empHrs=8 ;;
+        salary=$(( $empHrs*$empRatePerHr ));
+        totalSalary=$(( $totalSalary+$salary ))
 
-        *)
-                empHrs=0 ;;
-esac
-sal=$(( $empHrs*$empRatePerHrs ))
+done
+echo  $totalSalary
+
+
+
