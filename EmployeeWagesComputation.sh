@@ -2,31 +2,27 @@
 
 isPartTime=1
 isFullTime=2
-numberofWorkingDays=20
-empRatePerHr=20
-totalsalary=0
+ratePerHour=20
+numberOfWorkingDay=20
+maxHour=100
 
-for (( day=1; day<=numberofWorkingDays; day++ ))
+totalEmpHour=0
+totalWorkingDays=0
+while [[ $totalEmpHour -le $maxHour && $totalWorkingDays -le $numberOfWorkingDay ]]
 do
-        empCheck=$(( RANDOM%3 ))
-
-        case $empCheck in
-                $isFullTime)
-                        empHrs=8
-                        ;;
-                $isPartTime)
-                        empHrs=4
-                        ;;
-                *)
-                        empHrs=0
-                        ;;
-        esac
-
-        salary=$(( $empHrs*$empRatePerHr ));
-        totalSalary=$(( $totalSalary+$salary ))
-
+((totalWorkingDays++))
+empCheck=$(( RANDOM%3 ));
+case $empCheck in
+        $isPartTime) echo "Emp part time salary"
+        empHour=4
+        ;;
+        $isFullTime)  echo "Emp full time salary"
+        empHour=8
+        ;;
+        *) echo "Emp is not exist"
+        empHour=0
+        ;;
+esac
+totalEmpHour=$(( $totalEmpHour+$empHour ))
+totalSalary=$(( $totalEmpHour*$ratePerHour ))
 done
-echo  $totalSalary
-
-
-
