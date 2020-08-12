@@ -2,9 +2,11 @@
 
 isPartTime=1
 isFullTime=2
-ratePerHour=120
+ratePerHour=125
 noOfWorkingDays=2
 maxHrs=10
+
+declare -A dailyWages
 
 totalEmpHour=0
 totalWorkingDays=0
@@ -41,3 +43,5 @@ do
 	totalSalary="$( getDailyWages $totalEmpHour)"
 done
 echo ${dailyWages[@]}
+echo ${!dailyWages[@]}
+
